@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="style.css">
+		<title>APUSH Creativity Project</title>
+	</head>
+	<body>
+		<header>
+			<h1>APUSH Hangman!</h1>
+			<h4 style="text-align:center;">Brought to you by Warith Rahman and Azariah Teklu</h6>
+		</header>
+		<main>
+			<div class="container">
+				<h2>What's the Project?</h2>
+				<p>Based on the popular game Hangman, students have the opportunity to review crucial APUSH terms throughout the 9 periods in a fun game!</p>
+				<p>After selecting one of the periods below, a screen will pop up with a series of blanks (denoting the word) as well as a list of buttons to click that represent letters.</p>
+				<p>Students will click letters and either fill up blanks in the word or lose lives over time. Each term gives students a total of 6 lives (a head, body, and four limbs), and once these lives are lost the player loses.</p>
+				<p>After the student reveals the word (or loses, depending on the result), the word will be shown alongside a definition of the term in context of its historical significance.</p>
+				<h4>Ready to play?</h4>
+
+				<br>
+
+				<button class="fancy" onclick="startup(1)">Period 1 (1491-1607)</button>
+				<button class="fancy" onclick="startup(2)">Period 2 (1607-1754)</button>
+				<button class="fancy" onclick="startup(3)">Period 3 (1754-1800)</button>
+				<br>
+				<button class="fancy" onclick="startup(4)">Period 4 (1800-1848)</button>
+				<button class="fancy" onclick="startup(5)">Period 5 (1844-1877)</button>
+				<button class="fancy" onclick="startup(6)">Period 6 (1865-1898)</button>
+				<br>
+				<button class="fancy" onclick="startup(7)">Period 7 (1890-1945)</button>
+				<button class="fancy" onclick="startup(8)">Period 8 (1945-1980)</button>
+				<button class="fancy" onclick="startup(9)">Period 9 (1980- Now)</button>
+			</div>
+			<div class="container term"></div>
+			<div class="container hangman"></div>
+		</main>
+		<body><script src="index.js"></script></body>
+		<footer>
+			<p class="footnote"> Made by Warith Rahman via GitHub. Design inspired by <a href="https://www.ekzhang.com" target="_blank" style="color: lightgrey">Eric Zhang</a></p>
+		</footer>
+	</body>
+</html>
