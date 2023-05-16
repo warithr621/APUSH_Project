@@ -2,26 +2,51 @@ var lives_lost = 0;
 var container = document.getElementsByClassName("container")[0];
 var img = document.getElementsByClassName("hangman")[0];
 var term = document.getElementsByClassName("term")[0];
-var vocab, description;
+var vocab = "", description = "";
 var found = [];
 
+function extract(csvPath) {
+	return fetch(csvPath)
+		.then(response => response.text())
+		.then(data => {
+			const rows = data.split("\n");
+			if (rows[0].includes(',')) {
+				rows.shift();
+			}
+			const elem = rows[Math.floor(Math.random() * rows.length)];
 
-const terms = [[],
-	[["CHRISTOPHER COLUMBUS", "In 1492, Columbus travelled for Spain and founded the New World."]]
-	];
-
+			const columns = elem.split(',');
+			const trimmed = columns.map(column => column.trim());
+			return trimmed;
+		});
+}
 
 function startup(pd) {
+	let value = extract(`terms/Unit_${pd}.csv`);
+	value.then(val => interpret(pd, val));
+}
+
+function interpret(pd, val) {
 	let container = document.getElementsByClassName("container")[0];
 	container.innerHTML = `<h2>Period ${pd} Review!</h2>`;
-	let idx = Math.floor(Math.random() * terms[pd].length);
-	vocab = terms[pd][idx][0];
-	description = terms[pd][idx][1];
+
+	vocab = val[0];
+	for (let i = 1; i < val.length; i++) {
+		description += val[i];
+		if (i != val.length-1) {
+			description += ", ";
+		}
+	}
+	if (description.startsWith('"')) {
+		description = description.slice(1, -1);
+	}
 
 	let temp_str = "<h1>";
 	for (let i = 0; i < vocab.length; i++) {
 		if (vocab[i] === " ") {
 			temp_str += "<br>";
+		} else if (vocab[i] === "'") {
+			temp_str += "'";
 		} else {
 			temp_str += "_";
 		}
@@ -67,8 +92,12 @@ function chk(c) {
 				}
 			}
 			if (!worked) {
-				temp_str += "_";
-				blanks++;
+				if (vocab[i] === "'") {
+					temp_str += "'";
+				} else {
+					temp_str += "_";
+					blanks++;
+				}
 			}
 		}
 		if (i != vocab.length - 1) {
