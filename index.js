@@ -2,7 +2,7 @@ var lives_lost = 0;
 var container = document.getElementsByClassName("container")[0];
 var img = document.getElementsByClassName("hangman")[0];
 var term = document.getElementsByClassName("term")[0];
-var vocab = "", description = "";
+var vocab = "";
 var found = [];
 
 function extract(csvPath) {
@@ -31,22 +31,13 @@ function interpret(pd, val) {
 	container.innerHTML = `<h2>Period ${pd} Review!</h2>`;
 
 	vocab = val[0];
-	for (let i = 1; i < val.length; i++) {
-		description += val[i];
-		if (i != val.length-1) {
-			description += ", ";
-		}
-	}
-	if (description.startsWith('"')) {
-		description = description.slice(1, -1);
-	}
 
 	let temp_str = "<h1>";
 	for (let i = 0; i < vocab.length; i++) {
 		if (vocab[i] === " ") {
 			temp_str += "<br>";
-		} else if (vocab[i] === "'") {
-			temp_str += "'";
+		} else if (vocab[i] === "'" || vocab[i] === "-") {
+			temp_str += vocab[i];
 		} else {
 			temp_str += "_";
 		}
@@ -92,8 +83,8 @@ function chk(c) {
 				}
 			}
 			if (!worked) {
-				if (vocab[i] === "'") {
-					temp_str += "'";
+				if (vocab[i] === "'" || vocab[i] === "-") {
+					temp_str += vocab[i];
 				} else {
 					temp_str += "_";
 					blanks++;
@@ -117,5 +108,4 @@ function chk(c) {
 
 function end() {
 	container.innerHTML = `<h2>The word was: ${vocab}</h2>`;
-	term.innerHTML = `<h4>${description}</h4> <br> <p>To play again, reload the page!</p>`;
 }
