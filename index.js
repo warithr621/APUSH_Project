@@ -108,4 +108,5 @@ function chk(c) {
 
 function end() {
 	container.innerHTML = `<h2>The word was: ${vocab}</h2>`;
+	term.innerHTML = `<p>To play again, reload the page!</p>`;
 }
